@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -13,14 +15,18 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/camilomartinezrincon/useless-web-password-gen-open-ia-api/issues"
   },
   "homepage": "https://github.com/camilomartinezrincon/useless-web-password-gen-open-ia-api#readme",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "openai": "^6.25.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
