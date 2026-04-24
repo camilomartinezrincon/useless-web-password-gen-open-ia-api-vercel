@@ -6,8 +6,18 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
+app.options("*", cors());
+
 app.use(express.json());
-app.use(cors({ origin: "*" }));
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -16,6 +26,7 @@ const openai = new OpenAI({
 app.post("/api/chat", async (req, res) => {
   console.log("API KEY:", process.env.OPENAI_API_KEY ? "OK" : "MISSING");
   console.log("BODY:", req.body);
+  console.log("Origin recibida:", req.headers.origin);
 
   const { username, passwordOptions, passwordLength, fanOf } = req.body;
 
@@ -49,6 +60,11 @@ Respond ONLY with the password, no explanation.`;
     });
 
     const generatedPassword = completion.choices[0].message.content.trim();
+
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
     res.json({ generatedPassword });
   } catch (error) {
     console.error(error);
