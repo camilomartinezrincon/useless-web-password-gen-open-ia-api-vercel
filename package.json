@@ -1,33 +1,37 @@
 {
-  "name": "useless-web-password-gen-open-ia-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/camilomartinezrincon/useless-web-password-gen-open-ia-api.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "credentials-generator-unified",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
-  "bugs": {
-    "url": "https://github.com/camilomartinezrincon/useless-web-password-gen-open-ia-api/issues"
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "start": "node api/chat.js"
   },
-  "homepage": "https://github.com/camilomartinezrincon/useless-web-password-gen-open-ia-api#readme",
   "dependencies": {
-    "@vercel/node": "^5.7.13",
-    "cors": "^2.8.6",
-    "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "openai": "^6.25.0"
+    "openai": "^6.25.0",
+    "dotenv": "^17.3.1",
+    "cors": "^2.8.6",
+    "lucide-react": "^0.563.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "@vercel/node": "^5.7.13"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react-swc": "^4.2.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.2.4",
     "nodemon": "^3.1.14"
   }
 }

@@ -7,16 +7,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
-
-app.options("*", cors());
-
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 const openai = new OpenAI({
@@ -24,10 +15,6 @@ const openai = new OpenAI({
 });
 
 app.post("/api/chat", async (req, res) => {
-  console.log("API KEY:", process.env.OPENAI_API_KEY ? "OK" : "MISSING");
-  console.log("BODY:", req.body);
-  console.log("Origin recibida:", req.headers.origin);
-
   const { username, passwordOptions, passwordLength, fanOf } = req.body;
 
   if (!passwordLength) {
@@ -55,16 +42,9 @@ Respond ONLY with the password, no explanation.`;
       model: "gpt-4o-mini",
       max_tokens: 50,
       temperature: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
     });
 
     const generatedPassword = completion.choices[0].message.content.trim();
-
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
     res.json({ generatedPassword });
   } catch (error) {
     console.error(error);
@@ -73,8 +53,3 @@ Respond ONLY with the password, no explanation.`;
 });
 
 export default app;
-
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => console.log(`Servidor en http://localhost:${PORT}`));
-}
